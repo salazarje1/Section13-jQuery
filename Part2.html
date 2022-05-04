@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+    <title>Movie App</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Movie App</h1>
+        <form>
+            <label for="movie-title">Movie title</label>
+            <input type="text" id="movie-title" placeholder="Enter movie title...">
+            <br>
+            <label for="movie-rating">Movie rating</label>
+            <input type="number" id="movie-rating" min="1" max="10" placeholder="Enter rating...">
+            <button>Submit</button>
+        </form>
+
+    </div>
+    <hr>
+    <div>
+        <section id="movie-section"></section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $('form').on('submit', function(e){
+            e.preventDefault();
+            let counter = 0;  
+            const movie = $('#movie-title');
+            const rating = $('#movie-rating');
+            makeHtml(movie.val(), rating.val()); 
+            movie.val('');
+            rating.val(''); 
+        })
+
+        $('#movie-section').on('click', 'button', function(){
+            $(this).parent().remove();
+        })
+
+        const makeHtml = (movie, rating) => { 
+            $(`<div></div>`).addClass('movie-div').appendTo('#movie-section')
+                .append(`<p>Movie: ${movie}</p>`)
+                .append(`<p>Rating: ${rating}</p>`)
+                .append('<button>Remove Movie</button>')
+        }
+    </script>
+</body>
+</html>
